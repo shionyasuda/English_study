@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <style>
+        p {
+          height: 100px; /* 高さを指定 */
+          background-color: #cfc9c9; /* 背景色を指定 */
+          padding: 10px; /* 余白を指定 */
+        }
+    </style>
+
+	<title>英作文マスター</title>
+	<style>
+		.drag-element {
+			width: 130px;
+			height: 70px;
+			background-color: #ff9999;
+			border: 2px solid black;
+			position: absolute;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 20px;
+			font-weight: bold;
+			cursor: move;
+		}
+		.group1 {
+			background-color: #b3d9ff;
+		}
+		.group2 {
+			background-color: #ffe6b3;
+		}
+        .group3 {
+			background-color: #ccf7c9;
+		}
+
+        .group4 {
+			background-color: #f3cbf5;
+            width: 150px;
+			height: 70px;
+		}
+	</style>
+</head>
+<body>
+	<div id="drag-element-1" class="drag-element group1" style="top: 200px; left: 20px;">I</div>
+<div id="drag-element-2" class="drag-element group1" style="top: 300px; left: 20px;">Children </div>
+<div id="drag-element-4" class="drag-element group1" style="top: 400px; left: 20px;">We</div>
+<div id="drag-element-5" class="drag-element group1" style="top: 200px; left: 180px;">My friend</div>
+<div id="drag-element-3" class="drag-element group1" style="top: 300px; left: 180px;">You</div>
+<div id="drag-element-3" class="drag-element group1" style="top: 400px; left: 180px;">They</div>
+  
+<div id="drag-element-1" class="drag-element group3" style="top: 200px; left: 400px;">finish</div>
+<div id="drag-element-2" class="drag-element group3" style="top: 300px; left: 400px;">gives</div>
+<div id="drag-element-4" class="drag-element group3" style="top: 400px; left: 400px;">can get</div>
+<div id="drag-element-5" class="drag-element group3" style="top: 200px; left: 560px;">see</div>
+<div id="drag-element-3" class="drag-element group3" style="top: 300px; left: 560px;">visit</div>
+<div id="drag-element-3" class="drag-element group3" style="top: 400px; left: 560px;">read</div>
+
+<div id="drag-element-1" class="drag-element group2" style="top: 200px; left: 780px;">there</div>
+<div id="drag-element-2" class="drag-element group2" style="top: 300px; left: 780px;">a present</div>
+<div id="drag-element-4" class="drag-element group2" style="top: 400px; left: 780px;">Kyoto</div>
+<div id="drag-element-5" class="drag-element group2" style="top: 200px; left: 960px;">paintings</div>
+<div id="drag-element-3" class="drag-element group2" style="top: 300px; left: 960px;">books</div>
+<div id="drag-element-3" class="drag-element group2" style="top: 400px; left: 960px;">class</div>
+
+<div id="drag-element-1" class="drag-element group4" style="top: 200px; left: 1180px;">for me</div>
+<div id="drag-element-2" class="drag-element group4" style="top: 300px; left: 1180px;">in my room</div>
+<div id="drag-element-4" class="drag-element group4" style="top: 400px; left: 1180px;">by cars</div>
+<div id="drag-element-5" class="drag-element group4" style="top: 200px; left: 1360px;">with parents</div>
+<div id="drag-element-3" class="drag-element group4" style="top: 300px; left: 1360px;">at 5 p.m</div>
+<div id="drag-element-3" class="drag-element group4" style="top: 400px; left: 1360px;">on the wall</div>
+
+
+	<script>
+		// ドラッグされる要素を取得
+		var dragElements = document.querySelectorAll(".drag-element");
+
+		// マウスが要素内で押されたとき、マウス座標と要素の座標の差分を取得
+		var mouseX;
+		var mouseY;
+		var elementX;
+		var elementY;
+		var currentDragElement;
+		for (var i = 0; i < dragElements.length; i++) {
+    dragElements[i].addEventListener("mousedown", function(e) {
+        e.preventDefault(); // デフォルトのドラッグ操作を無効化する
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        elementX = this.offsetLeft;
+        elementY = this.offsetTop;
+        currentDragElement = this;
+        document.addEventListener("mousemove", mouseMoveHandler);
+        document.addEventListener("mouseup", mouseUpHandler);
+    });
+}
+
+
+		// マウスが移動したとき、要素を移動する
+		function mouseMoveHandler(e) {
+			var dx = e.clientX - mouseX;
+			var dy = e.clientY - mouseY;
+			currentDragElement.style.left = elementX + dx + "px";
+			currentDragElement.style.top = elementY + dy + "px";
+		}
+
+		// マウスが離されたとき、マウス移動とマウスアップのイベントリスナーを削除する
+		function mouseUpHandler(e) {
+			document.removeEventListener("mousemove", mouseMoveHandler);
+			document.removeEventListener("mouseup", mouseUpHandler);
+		}
+	</script>
+	
+<p style="text-align: center; vertical-align: middle; line-height: 2;"> 
+	<span style="background-color:#b3d9ff;font-size: 50px;">青</span>
+	<span style="background-color:#ccf7c9;font-size: 50px">緑</span>
+    <span style="background-color:#ffe6b3;font-size: 50px">黄</span>
+	<span style="background-color:#f3cbf5;font-size: 50px">紫</span>
+	<span style="font-size:25px">の順番に並べて英文を作ろう。</span></p>
+
+	<div id="text" style="position: absolute; top: 600px; left:15px; ; font-size: 20px;"> 
+		問題1 : 私は<span style="background-color:#f3cbf5;">私の部屋の中で</span>本を読みます。
+	</div>
+	<div id="text" style="position: absolute; top: 750px; left:15px; ; font-size: 15px; font-weight:200git remote -v">______________________________________________________________________________________________.</div>
+	
+	<div id="text" style="position: absolute; top: 780px; left:15px; ; font-size: 20px;">
+		問題2 : 私の友達は<span style="background-color:#f3cbf5;">私のために</span>プレゼントをあげます。
+	</div>
+	<div id="text" style="position: absolute; top: 930px; left:15px; ; font-size: 15px;">______________________________________________________________________________________________.</div>
+	
+	<div id="text" style="position: absolute; top: 960px; left:15px; ; font-size: 20px;">問題3 : 彼らは<span style="background-color:#f3cbf5;">5時に</span>授業を終えます。</div>
+	<div id="text" style="position: absolute; top: 1110px; left:15px; ; font-size: 15px;">______________________________________________________________________________________________.</div>
+	
+	<div id="text" style="position: absolute; top: 600px; left: 800px; ; font-size: 20px;">問題4 : 私たちは<span style="background-color:#f3cbf5;">両親と一緒に</span>京都を訪れる</div>
+	<div id="text" style="position: absolute; top: 750px; left:800px; ; font-size: 15px;">______________________________________________________________________________________________.</div>
+	
+	<div id="text" style="position: absolute; top: 780px; left:800px; ; font-size: 20px;">問題5 : あなたは<span style="background-color:#f3cbf5;">車で</span>そこに着けます。</div>
+	<div id="text" style="position: absolute; top: 930px; left:800px; ; font-size: 15px;">______________________________________________________________________________________________.</div>
+	
+	<div id="text" style="position: absolute; top: 960px; left:800px; ; font-size: 20px;">問題6 : 子供達は<span style="background-color:#f3cbf5;">壁の</span>絵を見ます。</div>
+	<div id="text" style="position: absolute; top: 1110px; left:800px; ; font-size: 15px;">______________________________________________________________________________________________.</div>
+    <h3><button><a href="index.html">Home</a></button></h3>
+</body>
+
+    </html>
